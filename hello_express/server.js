@@ -48,7 +48,7 @@ app.post('/users', function (req, res){
   //code to add user to db goes here!
   // redirect the user back to the root route. 
   // All we do is specify the URL we want to go to:
-  res.redirect('/');
+  res.redirect('/users');
 })
 
 // #7 npm install body-parser

@@ -1,0 +1,16 @@
+<html>
+<head>
+	<title>Results</title>
+</head>
+<body>
+	<div>
+		<% for(var x in users) { %>
+		<h3>Name: <%= users[x].name %></h3>
+		<h4>Age: <%= users[x].age %></h4>
+		<h4>Language: <%= users[x].anguage %></h4>
+		<h4>Comment: <%= users[x].comment %></h4>
+		<hr>
+		<% } %>
+	</div>
+</body>
+</html>

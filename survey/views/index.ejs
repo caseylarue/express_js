@@ -1,0 +1,20 @@
+<html>
+<head>
+ <title>Survey</title>
+</head>
+<body>
+	<h3>Add a User!</h3>
+	<form action='/users' method='post'>
+	Name: <input type='text' name='name'>
+	Age: <input type='text' name='age'>
+	Favorite Language:
+	<select name='language'>
+		<option value="javascript">Javascript</option>
+		<option value="ruby">Ruby</option>
+		<option value="node">node</option>
+	</select>
+	Comment<textarea name='comment'></textarea>
+	<input type='submit' value='Submit'>
+	</form>
+</body>
+</html>
