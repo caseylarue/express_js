@@ -1,0 +1,50 @@
+<html>
+<head>
+	<title>Survey</title>
+<!--     <link rel='stylesheet' href='/stylesheets/style.css' /> -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type ="text/javascript" src="/socket.io/socket.io.js"></script>
+    <script type ="text/javascript">
+    	$(document).ready(function (){
+      		var socket = io.connect();  // triggers the connection to server
+
+      		$("button").click(function (){
+      			var name = $('#name').val();
+      			var age = $('#age').val();
+      			var language = $('#language').val();
+      			var comment = $('#comment').val();
+      			socket.emit("new_user", {name: name, age: age, language: language, comment: comment});
+      		});
+
+  			socket.on("data", function (data){
+	  			$("#append").append("<p>You emitted the following info to the server"+data+"<p>");
+      		});
+
+      		socket.on("random", function (random){
+	  			console.log(random);
+	  			$("#append").append("<p>Your lucky number is: "+random+"<p>");
+      		});
+
+      		// socket.on("server_response", function (data){
+      		// 	console.log("The server says: " + data.response);
+      		// });
+
+		})
+    </script>
+</head>
+<body>
+	<div id="append">
+	</div>
+	<h3>Add a User!</h3>
+		Name: <input id='name' type='text'>
+		Age: <input id='age' type='text'>
+		Favorite Language:
+		<select id='language'>
+			<option value="javascript">Javascript</option>
+			<option value="ruby">Ruby</option>
+			<option value="node">node</option>
+		</select>
+		Comment<textarea id='comment'></textarea>	
+		<button>Submit</button>
+</body>
+</html>

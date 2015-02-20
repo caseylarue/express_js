@@ -1,0 +1,16 @@
+
+Steps for Application
+
+1) Have the server render the views/index.ejs that has the form for the user to fill out
+
+2) user fills form and submits: 
+
+3) form info is emitted to the server with event name "posting_form"
+
+4) server listens for the event 'posting_form'
+ - when the event gets triggered, organizes all the emitted info to form a single msg and sends this single message with the event called 'updated_message.'  It also EMITs an event called 'random_number' between 1-100
+
+5) the client listens for an event called "random_number" and when this event gets triggered, shows the number in HTML
+
+6) the client listens for an event called 'updated_message' and when the event gets triggered, displays the info in HTML
+
