@@ -1,0 +1,27 @@
+* {
+	color: blue;
+	margin: 10px;
+}
+
+#chat {
+	border: 1px solid black;
+	width: 600px;
+	height: 400px;
+}
+
+textarea {
+	width: 500px;
+	height: 70px;
+}
+
+#users_in_chat {
+	border: 1px solid black;
+	width: 400px;
+	height: 700px;
+	margin-left: 150px;
+}
+
+#body, #users_in_chat {
+	display: inline-block;
+	vertical-align: top;
+}
