@@ -1,0 +1,7 @@
+button {
+	display: block;
+	margin: 20px;
+	width: 150px;
+	height: 50px;
+	border-radius: 5px;
+}

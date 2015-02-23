@@ -1,0 +1,43 @@
+<html>
+<head>
+	<title>Epic Button Game!</title>
+  <link rel='stylesheet' href='style.css' />
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script type ="text/javascript" src="/socket.io/socket.io.js"></script>
+  <script type ="text/javascript">
+    $(document).ready(function (){
+        var socket = io.connect();
+
+        socket.on("counter_on_load", function(data){
+          $('#title').html("<div>This button has been pushed "+data.count+" times</div>");
+        })
+       
+        $("#epic_button").click(function (){
+            socket.emit("counter_increase");
+        });
+
+        socket.on("counter_plus", function(data){
+           $('#title').html("<div>This button has been pushed "+data.count+" times</div>");
+        });
+
+        $("#reset_button").click(function (){
+            socket.emit("counter_reset");
+        });
+
+          socket.on("counter_zero", function(data){
+          console.log("data", data);
+          console.log("data.count", data.count);
+          /// this is an [object Object in Firefox]
+           $('#title').html("<div>This button has been pushed "+data.count+" times</div>");
+        });
+
+  	})
+  </script>
+</head>
+<body>
+  <h1 id='title'>This button has been pushed 111 time(s)</h1>
+  <h5>Push this button to update the count!</h5>
+  <button id='epic_button'>Epic Button</button>
+  <button id='reset_button'>Reset</button>
+</body>
+</html>

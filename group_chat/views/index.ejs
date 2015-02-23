@@ -6,23 +6,30 @@
   <script type ="text/javascript" src="/socket.io/socket.io.js"></script>
   <script type ="text/javascript">
     $(document).ready(function (){
-    	socket = io.connect();
-    	
+    	var socket = io.connect();
+
     	var name = prompt("What is your name?");
-    	socket.emit("got_new_user", {name:name});
+
+    	socket.emit("got_new_user", {name: name});
 
     	socket.on("new_user", function(data){
     		console.log(data);
     		for(var i=0; i<(data.users).length; i++){
-    			console.log(data.users[i].name);
+    			$('#users').append("<p>"+data.users[i].name+"</p>");
     		}
-   
-    		// for(var x in users) {
-    		// 	console.log(users[x].name)
-    		// 	// $('#users_in_chat').append("<p>"+data.name+"</p>")
-    		// }
     	});
+   		
+   		$('button').click(function (){
+   			var message = $('#msg_text').val();
+   			socket.emit("message_post", {message: message});
+   		});
 
+   		socket.on("show_msgs", function(data){
+   			for(var i=0; i<(data.messages).length; i++){
+   				$('#chat').append("<div><p>"+data.messages[i].name+": "+data.messages[i].message+"</p></div>");
+   			}
+   			console.log(data.messages);
+   		});
   	})
   </script>
 </head>
@@ -32,11 +39,12 @@
 			<h2>Conversation Board</h2>
 			<div id="chat">
 			</div>
-			<textarea placeholder="type your message here"></textarea>
+			<textarea id="msg_text" placeholder="type your message here"></textarea>
 			<button>Submit!</button>
 		</div>
 		<div id="users_in_chat">
 			<p>Users in this chat:</p>
+			<div id="users"></div>
 		</div>
 	</div>
 </body>
